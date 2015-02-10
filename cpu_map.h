@@ -34,6 +34,47 @@
 #define cpu_map_h
 
 //----------------------------------------------------------------------------------------
+#ifdef CPU_MAP_ATMEGA328P_CNCV3 // Arduino Uno for CNC Shield V3
+
+  // Serial port pins
+  #define SERIAL_RX USART_RX_vect
+  #define SERIAL_UDRE USART_UDRE_vect
+
+  // Define laser pulse output pins. NOTE: All laser pins must be on the same port.
+  #define LASER_DDR       DDRD
+  #define LASER_PORT      PORTD
+  #define LASER1_BIT      4  // Uno Digital Pin 4        Driver Z-STEP
+  #define LASER2_BIT      7  // Uno Digital Pin 7        Driver Z-DIR
+  #define LASER3_BIT      3  // Uno Digital Pin 3        Driver Y-STEP
+  #define LASER4_BIT      6  // Uno Digital Pin 6        Driver Y-DIR
+  #define LASER_MASK      ((1<<LASER1_BIT)|(1<<LASER2_BIT)|(1<<LASER3_BIT)|(1<<LASER4_BIT)) // All step bits
+
+  // Define step pulse output pins. NOTE: All step bit pins must be on the same port.
+  #define STEP_DDR        DDRD
+  #define STEP_PORT       PORTD
+  #define X_STEP_BIT      2  // Uno Digital Pin 2
+  #define STEP_MASK       (1<<X_STEP_BIT) // All step bits
+
+  // Define step direction output pins. NOTE: All direction pins must be on the same port.
+  #define DIRECTION_DDR     DDRD
+  #define DIRECTION_PORT    PORTD
+  #define X_DIRECTION_BIT   5  // Uno Digital Pin 5
+  #define DIRECTION_MASK    (1<<X_DIRECTION_BIT) // All direction bits
+
+  // Define stepper driver enable/disable output pin (all axis)
+  #define STEPPERS_DISABLE_DDR    DDRB
+  #define STEPPERS_DISABLE_PORT   PORTB
+  #define STEPPERS_DISABLE_BIT    0  // Uno Digital Pin 8
+  #define STEPPERS_DISABLE_MASK   (1<<STEPPERS_DISABLE_BIT)
+
+  // Define probe switch input pin.
+  #define PROBE_DDR       DDRC
+  #define PROBE_PIN       PINC
+  #define PROBE_PORT      PORTC
+  #define PROBE_BIT       5  // Uno Analog Pin 5        ?????????????????????
+  #define PROBE_MASK      (1<<PROBE_BIT)
+
+#endif
 
 #ifdef CPU_MAP_ATMEGA328P_HORUS // Arduino Uno for Horus Project
 
